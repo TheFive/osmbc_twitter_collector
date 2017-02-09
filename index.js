@@ -74,6 +74,8 @@ var config = require("config");
 var twitterCredentials = config.get("twitter");
 var twitterUsers = config.get("TwitterUser");
 
+var OSMBC_collect = config.get("OSMBC_collect");
+
 
 
 
@@ -104,7 +106,7 @@ Object.keys(twitterUsers).forEach(function(twitterUser){
       if (!json[tweet.id_str]) {
        // console.log(tweet.user.name+" tweeted:");
        // console.log(">        >"+tweet.text);
-        request.post("http://localhost:3000/osmbc/api/collectArticle/DevelopmentApiKeyTBC",
+        request.post(OSMBC_collect,
           {form:{OSMUser:twitterUsers[twitterUser],collection:"https://twitter.com/"+twitterUser+"/status/"+tweet.id_str}},
             function(err, data){
               if (err) {
